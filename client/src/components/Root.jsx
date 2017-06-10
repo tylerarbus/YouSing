@@ -4,8 +4,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import SearchBar from './SearchBar.jsx';
-import VideoPlayer from './VideoPlayer.jsx';
+import SingView from './SingView.jsx';
 
 export class Root extends React.Component {
   render() {
@@ -13,7 +12,7 @@ export class Root extends React.Component {
       <Provider store={this.props.store}>
         <ConnectedRouter history={this.props.history}>
           <div>
-            <Route path="/" component={SearchBar} />
+            <Route path="/" component={SingView} />
           </div>
         </ConnectedRouter>
       </Provider>

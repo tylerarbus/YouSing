@@ -10,8 +10,7 @@ export class VideoPlayer extends React.Component {
   }
 
   onPlayerReady(event) {
-    console.log(event.target);
-    //event.target.playVideo();
+    event.target.playVideo();
   }
 
 
@@ -19,7 +18,7 @@ export class VideoPlayer extends React.Component {
     return (
       <div>
         <YouTube
-          videoId="VuNIsY6JdUw"
+          videoId={this.props.selectedVideoId}
           opts={{
             height: '500px',
             width: '900px',
@@ -39,9 +38,8 @@ export class VideoPlayer extends React.Component {
 
 const mapStateToProps = state => (
   {
-
+    selectedVideoId: state.search.selectedVideoId
   }
 );
 
-// export default connect(mapStateToProps)(VideoPlayer);
-export default VideoPlayer;
+export default connect(mapStateToProps)(VideoPlayer);

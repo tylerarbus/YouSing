@@ -6,17 +6,21 @@ import { searchYoutube } from './search.actions.js';
 export class SearchBar extends React.Component {
   constructor(props) {
     super(props);
+    this.onChange = this.onChange.bind(this);
   }
 
-  shouldComponentUpdate() {
-    console.log(this.props);
+  onChange(e) {
+    this.props.newSearch(e.target.value);
   }
 
   render() {
-    this.props.newSearch('hello');
     return (
       <div>
-        SearchBar
+        <input
+          type="text"
+          autoFocus="true"
+          onChange={this.onChange}
+        />
       </div>
     );
   }

@@ -8,6 +8,13 @@ export const searchResults = results => (
   }
 );
 
+export const selectVideo = id => (
+  {
+    type: 'SELECT_VIDEO',
+    selectedVideoId: id
+  }
+);
+
 export const searchYoutube = (query) => {
   const params = {
     part: 'snippet',
