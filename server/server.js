@@ -6,6 +6,7 @@ const path = require('path');
 const dev = require('./dev.js');
 
 const app = express();
+let server;
 
 if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
   dev.webpack(app);
@@ -23,9 +24,18 @@ app.get('*', (req, res) => {
 const port = process.env.PORT || 3000;
 
 if (process.env.NODE_ENV !== 'test') {
-  app.listen(port, () => {
+  server = app.listen(port, () => {
     console.log(`listening on port ${port}...`);
   });
 }
+
+const io = require('socket.io')(server);
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+});
 
 module.exports = { app };

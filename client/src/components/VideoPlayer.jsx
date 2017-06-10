@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import YouTube from 'react-youtube'
+import YouTube from 'react-youtube';
 
 export class VideoPlayer extends React.Component {
 
@@ -21,8 +21,8 @@ export class VideoPlayer extends React.Component {
         <YouTube
           videoId="VuNIsY6JdUw"
           style={{
-            height: '400px',
-            width: '700px'
+            height: '500px',
+            width: '900px'
           }}
           onReady={this.onPlayerReady}
         />
