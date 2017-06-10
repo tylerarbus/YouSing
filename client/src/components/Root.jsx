@@ -1,27 +1,25 @@
 import React from 'react';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import SearchBar from './SearchBar.jsx';
 import VideoPlayer from './VideoPlayer.jsx';
 
 export class Root extends React.Component {
-
   render() {
     return (
-      <Provider store={this.props.store} >
-        <VideoPlayer />
+      <Provider store={this.props.store}>
+        <ConnectedRouter history={this.props.history}>
+          <div>
+            <Route path="/" component={SearchBar} />
+          </div>
+        </ConnectedRouter>
       </Provider>
     );
   }
 }
-
-const mapStateToProps = state => (
-  {
-    store: state.store
-  }
-);
 
 Root.propTypes = {
   store: PropTypes.objectOf(PropTypes.oneOfType(
@@ -29,4 +27,4 @@ Root.propTypes = {
     )).isRequired
 };
 
-export default connect(mapStateToProps)(Root);
+export default Root;

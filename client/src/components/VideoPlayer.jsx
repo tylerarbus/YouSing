@@ -20,9 +20,15 @@ export class VideoPlayer extends React.Component {
       <div>
         <YouTube
           videoId="VuNIsY6JdUw"
-          style={{
+          opts={{
             height: '500px',
-            width: '900px'
+            width: '900px',
+            playerVars: {
+              autoplay: 0,
+              controls: 0,
+              enablejsapi: 1,
+              fs: 0
+            }
           }}
           onReady={this.onPlayerReady}
         />
