@@ -1,5 +1,5 @@
 import React from 'react';
-//import simplewebrtc from 'simplewebrtc';
+import SimpleWebRTC from 'simplewebrtc';
 //import { connect } from 'react-redux';
 import socket from './socket.js';
 
@@ -9,19 +9,20 @@ export class VideoChat extends React.Component {
     var webrtc = new SimpleWebRTC({
       localVideoEl: 'localVideo',
       remoteVideosEl: 'remoteVideos',
-      autoRequestMedia: true
+      autoRequestMedia: true,
+      socketio: socket
     });
 
     webrtc.on('readyToCall', () => {
-      webrtc.joinRoom('yousing');
+      webrtc.joinRoom('youSing');
     });
   }
 
   render() {
     return (
       <div>
-        <video id="localVideo" style={{ height: '150px' }} />
-        <div id="remoteVideos" style={{ height: '150px' }} />
+        <video id="localVideo" style={{ height: '100px' }} />
+        <div id="remoteVideos" style={{ height: '100px' }} />
       </div>
     );
   }

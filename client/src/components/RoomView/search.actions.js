@@ -1,5 +1,5 @@
 import axios from 'axios';
-import youtubeApiKey from '../../config.js';
+import youtubeApiKey from '../../../config.js';
 
 export const searchResults = results => (
   {
