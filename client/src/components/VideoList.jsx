@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import socket from './socket.js';
 
 import VideoEntry from './VideoEntry.jsx';
 import { selectVideo } from './search.actions.js';
@@ -8,10 +9,16 @@ export class VideoList extends React.Component {
   constructor(props) {
     super(props);
     this.onVideoClick = this.onVideoClick.bind(this);
+    socket.on('videoSelect', ({ videoId }) => {
+      this.props.selectVideo(videoId);
+    });
   }
 
   onVideoClick(id) {
     this.props.selectVideo(id);
+    socket.emit('videoSelect', {
+      videoId: id
+    });
   }
 
   render() {

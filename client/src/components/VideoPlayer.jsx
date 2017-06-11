@@ -10,9 +10,8 @@ export class VideoPlayer extends React.Component {
   }
 
   onPlayerReady(event) {
-    event.target.playVideo();
+    // event.target.playVideo();
   }
-
 
   render() {
     return (

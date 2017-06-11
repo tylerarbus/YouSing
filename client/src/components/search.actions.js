@@ -8,12 +8,12 @@ export const searchResults = results => (
   }
 );
 
-export const selectVideo = id => (
-  {
+export const selectVideo = (videoId) => {
+  return {
     type: 'SELECT_VIDEO',
-    selectedVideoId: id
-  }
-);
+    selectedVideoId: videoId
+  };
+};
 
 export const searchYoutube = (query) => {
   const params = {
