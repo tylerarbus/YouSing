@@ -38,10 +38,9 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('videoSelect', videoId);
   });
 
-  socket.on('disconnect', function(){
+  socket.on('disconnect', () => {
     console.log('user disconnected');
   });
-
 });
 
 module.exports = { app };

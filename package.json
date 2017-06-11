@@ -34,7 +34,10 @@
     "redux": "^3.6.0",
     "redux-logger": "^3.0.1",
     "redux-thunk": "^2.2.0",
-    "socket.io": "^2.0.2"
+    "simplewebrtc": "^3.0.0",
+    "socket.io": "^2.0.2",
+    "socket.io-client": "^2.0.2",
+    "webrtc-adapter": "^4.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",
