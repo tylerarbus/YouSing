@@ -38,6 +38,10 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('videoSelect', videoId);
   });
 
+  socket.on('videoPlay', (play) => {
+    socket.broadcast.emit('videoPlay', play);
+  });
+
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
