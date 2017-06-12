@@ -13,11 +13,21 @@ export class VideoPlayer extends React.Component {
     };
 
     socket.on('videoPlay', ({ play }) => {
-      if (play) { this.playVideo(); }
+      if (play) {
+        this.playVideo(true);
+      }
     });
 
     this.onPlayerReady = this.onPlayerReady.bind(this);
     this.playVideo = this.playVideo.bind(this);
+  }
+
+  componentWillUpdate(nextProps) {
+    if (this.props.selectedVideoId !== nextProps.selectedVideoId) {
+      this.setState({
+        dimmed: true
+      });
+    }
   }
 
   onPlayerReady(event) {
@@ -26,14 +36,16 @@ export class VideoPlayer extends React.Component {
     });
   }
 
-  playVideo() {
+  playVideo(triggered) {
     this.setState({
       dimmed: false
     });
 
-    socket.emit('videoPlay', { play: true });
-
     this.state.youTubePlayer.playVideo();
+
+    if (triggered !== true) {
+      socket.emit('videoPlay', { play: true });
+    }
   }
 
   render() {
