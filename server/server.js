@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const initializeSockets = require('./socket.js');
+const Room = require('./models/Room.js');
 
 const dev = require('./dev.js');
 
@@ -17,6 +19,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.resolve(__dirname, '../client/public')));
 
+app.post('/room', (req, res) => {
+  const roomName = req.body.room;
+  return Room.exists(roomName)
+    .then((exists) => {
+      if (exists) {
+        res.status(200).end();
+      } else {
+        return Room.create(roomName);
+      }
+    })
+    .then(() => {
+      res.status(200).end();
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).end();
+    });
+});
+
 app.get('*', (req, res) => {
   res.redirect('/');
 });
@@ -27,24 +48,7 @@ if (process.env.NODE_ENV !== 'test') {
   server = app.listen(port, () => {
     console.log(`listening on port ${port}...`);
   });
+  initializeSockets(server);
 }
 
-const io = require('socket.io')(server);
-
-io.on('connection', (socket) => {
-  console.log('a user connected');
-
-  socket.on('videoSelect', (videoId) => {
-    socket.broadcast.emit('videoSelect', videoId);
-  });
-
-  socket.on('videoPlay', (play) => {
-    socket.broadcast.emit('videoPlay', play);
-  });
-
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
-  });
-});
-
-module.exports = { app };
+module.exports = { app, server };
