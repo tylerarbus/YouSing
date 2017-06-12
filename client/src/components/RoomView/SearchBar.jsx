@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Input } from 'semantic-ui-react';
 
 import { searchYoutube } from './search.actions.js';
 
@@ -16,8 +17,8 @@ export class SearchBar extends React.Component {
   render() {
     return (
       <div>
-        <input
-          type="text"
+        <Input
+          placeholder="Search YouTube..."
           autoFocus="true"
           onChange={this.onChange}
         />

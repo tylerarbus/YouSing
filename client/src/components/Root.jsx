@@ -4,17 +4,21 @@ import { ConnectedRouter } from 'react-router-redux';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import Nav from './Nav.jsx';
 import RoomView from './RoomView/Root.jsx';
 
 export class Root extends React.Component {
   render() {
     return (
       <Provider store={this.props.store}>
-        <ConnectedRouter history={this.props.history}>
-          <div>
-            <Route path="/" component={RoomView} />
-          </div>
-        </ConnectedRouter>
+        <div>
+          <Nav />
+          <ConnectedRouter history={this.props.history}>
+            <div>
+              <Route path="/" component={RoomView} />
+            </div>
+          </ConnectedRouter>
+        </div>
       </Provider>
     );
   }

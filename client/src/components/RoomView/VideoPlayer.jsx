@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Segment } from 'semantic-ui-react';
 import YouTube from 'react-youtube';
 
 export class VideoPlayer extends React.Component {
@@ -15,12 +16,12 @@ export class VideoPlayer extends React.Component {
 
   render() {
     return (
-      <div>
+      <Segment compact style={{ height: '425px', width: '750px' }}>
         <YouTube
           videoId={this.props.selectedVideoId}
           opts={{
-            height: '500px',
-            width: '900px',
+            height: '425px',
+            width: '750px',
             playerVars: {
               autoplay: 0,
               controls: 0,
@@ -30,7 +31,7 @@ export class VideoPlayer extends React.Component {
           }}
           onReady={this.onPlayerReady}
         />
-      </div>
+      </Segment>
     );
   }
 }

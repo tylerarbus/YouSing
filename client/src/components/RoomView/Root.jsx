@@ -6,8 +6,10 @@ import VideoChat from './VideoChat.jsx';
 
 const SingView = () => (
   <div>
-    <VideoChat />
-    <VideoPlayer />
+    <section style={{ display: 'flex' }} >
+      <VideoPlayer />
+      <VideoChat />
+    </section>
     <SearchBar />
     <VideoList />
   </div>

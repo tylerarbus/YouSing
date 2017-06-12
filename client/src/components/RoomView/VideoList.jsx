@@ -24,8 +24,12 @@ export class VideoList extends React.Component {
   render() {
     return (
       <div>
-          {this.props.searchResults && this.props.searchResults.data.items.map(video => (
-            <VideoEntry video={video} onClick={this.onVideoClick} />
+          {this.props.searchResults && this.props.searchResults.data.items.map((video, i) => (
+            <VideoEntry
+              video={video}
+              onClick={this.onVideoClick}
+              key={i}
+            />
           ))}
       </div>
     );
