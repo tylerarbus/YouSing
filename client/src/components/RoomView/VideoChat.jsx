@@ -20,6 +20,12 @@ export class VideoChat extends React.Component {
   }
 
   render() {
+    const segmentStyle = {
+      position: 'relative',
+      height: '460px',
+      width: '425px'
+    };
+
     const localVideoStyle = {
       position: 'absolute',
       width: '25%',
@@ -32,13 +38,6 @@ export class VideoChat extends React.Component {
       width: '405',
       height: '305',
       zindex: '-1'
-    };
-
-    const segmentStyle = {
-      position: 'relative',
-      height: '425px',
-      width: '425px',
-      margin: '0 0 0 10'
     };
 
     return (

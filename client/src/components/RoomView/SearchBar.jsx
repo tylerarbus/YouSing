@@ -16,11 +16,12 @@ export class SearchBar extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ margin: '10px 0 20px 15px' }} >
         <Input
           placeholder="Search YouTube..."
           autoFocus="true"
           onChange={this.onChange}
+          style={{ width: '300px' }}
         />
       </div>
     );

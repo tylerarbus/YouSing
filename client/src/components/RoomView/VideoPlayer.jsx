@@ -16,7 +16,7 @@ export class VideoPlayer extends React.Component {
 
   render() {
     return (
-      <Segment compact style={{ height: '425px', width: '750px' }}>
+      <Segment compact style={{ height: '425px', width: '750px', margin: '15px 10px 10px 10px' }}>
         <YouTube
           videoId={this.props.selectedVideoId}
           opts={{
