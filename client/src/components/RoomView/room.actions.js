@@ -1,4 +1,5 @@
 import axios from 'axios';
+import socket from './socket.js';
 import youtubeApiKey from '../../../config.js';
 
 export const searchResults = results => (
@@ -49,7 +50,10 @@ export const joinRoom = roomName => (
   (dispatch) => {
     dispatch(joiningRoom());
     axios.post('/room', { room: roomName })
-      .then(() => dispatch(joinedRoom(roomName)))
+      .then(() => {
+        socket.emit('joinedRoom', { roomName });
+        dispatch(joinedRoom(roomName));
+      })
       .catch(error => console.log('Error joining room', error));
   }
 );

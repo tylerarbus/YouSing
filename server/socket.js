@@ -6,12 +6,16 @@ module.exports = (server) => {
   io.on('connection', (socket) => {
     console.log('a user connected');
 
-    socket.on('videoSelect', (videoId) => {
-      socket.broadcast.emit('videoSelect', videoId);
-    });
+    socket.on('joinedRoom', ({ roomName }) => {
+      socket.join(roomName);
 
-    socket.on('videoPlay', (play) => {
-      socket.broadcast.emit('videoPlay', play);
+      socket.on('videoSelect', (videoId) => {
+        socket.broadcast.to(roomName).emit('videoSelect', videoId);
+      });
+
+      socket.on('videoPlay', (play) => {
+        socket.broadcast.to(roomName).emit('videoPlay', play);
+      });      
     });
 
     socket.on('disconnect', () => {
