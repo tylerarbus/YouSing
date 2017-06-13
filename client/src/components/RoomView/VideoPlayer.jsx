@@ -61,9 +61,10 @@ export class VideoPlayer extends React.Component {
           <Button
             primary
             onClick={this.playVideo}
-            disabled={!this.state.youTubePlayer}
+            disabled={(!this.state.youTubePlayer || !this.props.selectedVideoId)}
           >
-            Play Video!
+            {!this.props.selectedVideoId && 'Select Video'}
+            {this.props.selectedVideoId && 'Play Video'}
           </Button>
         </Dimmer>
         <YouTube
@@ -87,7 +88,7 @@ export class VideoPlayer extends React.Component {
 
 const mapStateToProps = state => (
   {
-    selectedVideoId: state.search.selectedVideoId
+    selectedVideoId: state.room.selectedVideoId
   }
 );
 

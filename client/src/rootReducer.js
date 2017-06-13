@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-import search from './components/RoomView/search.reducer.js';
+import room from './components/RoomView/room.reducer.js';
 
 const rootReducer = combineReducers({
-  search,
+  room,
   router: routerReducer
 });
 

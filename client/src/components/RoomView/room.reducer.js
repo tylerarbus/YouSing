@@ -1,9 +1,11 @@
 const initialState = {
   searchResults: null,
-  selectedVideoId: 'VuNIsY6JdUw'
+  selectedVideoId: null,
+  joining: false,
+  name: null
 };
 
-const search = (state = initialState, action) => {
+const room = (state = initialState, action) => {
   switch (action.type) {
     case 'RECEIVED_SEARCH_RESULTS':
       return {
@@ -15,9 +17,20 @@ const search = (state = initialState, action) => {
         ...state,
         selectedVideoId: action.selectedVideoId
       };
+    case 'JOINING_ROOM':
+      return {
+        ...state,
+        joining: true
+      };
+    case 'JOINED_ROOM':
+      return {
+        ...state,
+        joining: false,
+        name: action.name
+      };
     default:
       return state;
   }
 };
 
-export default search;
+export default room;

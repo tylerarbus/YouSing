@@ -31,3 +31,25 @@ export const searchYoutube = (query) => {
       .catch(error => console.log('Error searching YouTube API', error));
   };
 };
+
+export const joiningRoom = () => (
+  {
+    type: 'JOINING_ROOM'
+  }
+);
+
+export const joinedRoom = roomName => (
+  {
+    type: 'JOINED_ROOM',
+    name: roomName
+  }
+);
+
+export const joinRoom = roomName => (
+  (dispatch) => {
+    dispatch(joiningRoom());
+    axios.post('/room', { room: roomName })
+      .then(() => dispatch(joinedRoom(roomName)))
+      .catch(error => console.log('Error joining room', error));
+  }
+);

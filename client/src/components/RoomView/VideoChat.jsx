@@ -1,7 +1,7 @@
 import React from 'react';
 import SimpleWebRTC from 'simplewebrtc';
 import { Segment } from 'semantic-ui-react';
-//import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import socket from './socket.js';
 
 export class VideoChat extends React.Component {
@@ -15,7 +15,7 @@ export class VideoChat extends React.Component {
     });
 
     webrtc.on('readyToCall', () => {
-      webrtc.joinRoom('youSing');
+      webrtc.joinRoom(this.props.roomName);
     });
   }
 
@@ -49,5 +49,10 @@ export class VideoChat extends React.Component {
   }
 }
 
-export default VideoChat;
-// export default connect(mapStateToProps, mapDispatchToProps)(VideoChat);
+const mapStateToProps = state => (
+  {
+    roomName: state.room.name
+  }
+);
+
+export default connect(mapStateToProps)(VideoChat);

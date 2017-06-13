@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import socket from './socket.js';
 
 import VideoEntry from './VideoEntry.jsx';
-import { selectVideo } from './search.actions.js';
+import { selectVideo } from './room.actions.js';
 
 export class VideoList extends React.Component {
   constructor(props) {
@@ -38,7 +38,7 @@ export class VideoList extends React.Component {
 
 const mapStateToProps = state => (
   {
-    searchResults: state.search.searchResults
+    searchResults: state.room.searchResults
   }
 );
 

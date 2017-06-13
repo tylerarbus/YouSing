@@ -2,12 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Input } from 'semantic-ui-react';
 
-import { searchYoutube } from './search.actions.js';
+import { searchYoutube } from './room.actions.js';
 
 export class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.onChange = this.onChange.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.newSearch('karaoke');
   }
 
   onChange(e) {
@@ -30,15 +34,15 @@ export class SearchBar extends React.Component {
 
 const mapStateToProps = state => (
   {
-    searchResults: state.searchResults
+
   }
 );
 
 const mapDispatchToProps = dispatch => (
   {
-    newSearch: query => (
-      dispatch(searchYoutube(query))
-    )
+    newSearch: (query) => {
+      dispatch(searchYoutube(query));
+    }
   }
 );
 

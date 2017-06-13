@@ -1,5 +1,7 @@
+const socketio = require('socket.io');
+
 module.exports = (server) => {
-  const io = require('socket.io')(server);
+  const io = socketio(server);
 
   io.on('connection', (socket) => {
     console.log('a user connected');
@@ -16,4 +18,4 @@ module.exports = (server) => {
       console.log('user disconnected');
     });
   });
-}
+};

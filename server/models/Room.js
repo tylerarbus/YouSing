@@ -1,3 +1,4 @@
+const db = require('../../db/index.js');
 const Room = require('../../db/Room.js');
 
 module.exports.exists = roomName => (
