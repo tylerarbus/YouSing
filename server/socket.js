@@ -1,4 +1,5 @@
 const socketio = require('socket.io');
+const Room = require('./models/Room.js');
 
 module.exports = (server) => {
   const io = socketio(server);
@@ -11,15 +12,19 @@ module.exports = (server) => {
 
       socket.on('videoSelect', (videoId) => {
         socket.broadcast.to(roomName).emit('videoSelect', videoId);
+        Room.addSong(roomName, videoId);
       });
 
       socket.on('videoPlay', (play) => {
         socket.broadcast.to(roomName).emit('videoPlay', play);
-      });      
-    });
+      });
 
-    socket.on('disconnect', () => {
-      console.log('user disconnected');
+      Room.addUser(roomName);
+
+      socket.on('disconnect', () => {
+        console.log('user disconnected');
+        Room.removeUser(roomName);
+      });
     });
   });
 };

@@ -37,6 +37,10 @@ module.exports.create = roomName => (
   })
 );
 
+module.exports.addUser = (roomName) => {};
+module.exports.removeUser = (roomName) => {};
+module.exports.addSong = (roomName, videoId) => {};
+
 // module.exports.addUser = (roomName) => (
 //   new Promise((res, rej) => {
 //     Room.findOneAndUpdate({ name: roomName }, { $set: { participants: (entry[0].participants + 1) } }, { new: true }, (err, results) => {
