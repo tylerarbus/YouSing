@@ -24,8 +24,7 @@ module.exports.create = roomName => (
   new Promise((res, rej) => {
     const newRoom = {
       room: roomName,
-      participants: 0,
-      created: Date.now()
+      participants: 0
     };
     Room.create(newRoom, (err, results) => {
       if (err) {
@@ -37,18 +36,38 @@ module.exports.create = roomName => (
   })
 );
 
-module.exports.addUser = (roomName) => {};
-module.exports.removeUser = (roomName) => {};
-module.exports.addSong = (roomName, videoId) => {};
+module.exports.addSong = (roomName, videoId) => (
+  new Promise((res, rej) => {
+    Room.findOneAndUpdate({ name: roomName }, { $push: { songs: videoId }, accessed: Date.now() }, (err, results) => {
+      if (err) {
+        rej(err);
+      } else {
+        res(results);
+      }
+    });
+  })
+);
 
-// module.exports.addUser = (roomName) => (
-//   new Promise((res, rej) => {
-//     Room.findOneAndUpdate({ name: roomName }, { $set: { participants: (entry[0].participants + 1) } }, { new: true }, (err, results) => {
-//       if (err) {
-//         rej(err);
-//       } else {
-//         res(results);
-//       }
-//     });
-//   })
-// );
+module.exports.addUser = (roomName) => (
+  new Promise((res, rej) => {
+    Room.findOneAndUpdate({ name: roomName }, { $inc: { participants: 1 }, accessed: Date.now() }, (err, results) => {
+      if (err) {
+        rej(err);
+      } else {
+        res(results);
+      }
+    });
+  })
+);
+
+module.exports.removeUser = (roomName) => (
+  new Promise((res, rej) => {
+    Room.findOneAndUpdate({ name: roomName }, { $inc: { participants: -1 } }, (err, results) => {
+      if (err) {
+        rej(err);
+      } else {
+        res(results);
+      }
+    });
+  })
+);
