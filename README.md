@@ -14,7 +14,7 @@ Peer-to-peer karaoke powered by Socket.io and WebRTC.
 
 1. Node
 2. Express
-3. PostgreSQL
+3. MongoDB
 4. Socket.io
 5. WebRTC
 
