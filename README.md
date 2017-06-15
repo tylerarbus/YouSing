@@ -4,11 +4,15 @@ Peer-to-peer karaoke powered by Socket.io and WebRTC.
 
 ## Screenshots
 
-### Journal
+### Landing Page
 
 ![Alt text](./screenshots/landing.png?raw=true)
 
+### Room
+
 ![Alt text](./screenshots/room.png?raw=true)
+
+### Architecture Diagram
 
 ![Alt text](./screenshots/architecture.png?raw=true)
 
