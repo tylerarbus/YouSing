@@ -2,6 +2,16 @@
 
 Peer-to-peer karaoke powered by Socket.io and WebRTC.
 
+## Screenshots
+
+### Journal
+
+![Alt text](./screenshots/landing.png?raw=true)
+
+![Alt text](./screenshots/room.png?raw=true)
+
+![Alt text](./screenshots/architecture.png?raw=true)
+
 ## :package: Tech Stack
 
 ### Front-End
