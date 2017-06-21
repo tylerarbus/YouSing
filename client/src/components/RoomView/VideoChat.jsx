@@ -1,12 +1,14 @@
 import React from 'react';
 import SimpleWebRTC from 'simplewebrtc';
-import { Segment } from 'semantic-ui-react';
+import { Segment, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import socket from './socket.js';
 
 export class VideoChat extends React.Component {
 
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+
     const webrtc = new SimpleWebRTC({
       localVideoEl: 'localVideo',
       remoteVideosEl: 'remoteVideos',
@@ -14,15 +16,48 @@ export class VideoChat extends React.Component {
       socketio: socket
     });
 
-    webrtc.on('readyToCall', () => {
-      webrtc.joinRoom(this.props.roomName);
+    this.state = {
+      webrtc,
+      videoPaused: false,
+      audioPaused: false
+    };
+
+    this.onPauseVideo = this.onPauseVideo.bind(this);
+    this.onMute = this.onMute.bind(this);
+  }
+
+  componentDidMount() {
+    this.state.webrtc.on('readyToCall', () => {
+      this.state.webrtc.joinRoom(this.props.roomName);
+    });
+  }
+
+  onPauseVideo() {
+    if (!this.state.videoPaused) {
+      this.state.webrtc.pauseVideo();
+    } else {
+      this.state.webrtc.resumeVideo();
+    }
+    this.setState({
+      videoPaused: !this.state.videoPaused
+    });
+  }
+
+  onMute() {
+    if (!this.state.audioMuted) {
+      this.state.webrtc.mute();
+    } else {
+      this.state.webrtc.unmute();
+    }
+    this.setState({
+      audioMuted: !this.state.audioMuted
     });
   }
 
   render() {
     const segmentStyle = {
       position: 'relative',
-      height: '460px',
+      height: '400px',
       width: '425px'
     };
 
@@ -44,6 +79,10 @@ export class VideoChat extends React.Component {
       <Segment style={segmentStyle} >
         <video id="localVideo" style={localVideoStyle} />
         <div id="remoteVideos" style={remoteVideoStyle} />
+        <Button.Group basic size="big" style={{ margin: '15px 0 0 0' }} >
+          <Button icon="mute" />
+          <Button icon="video camera" onClick={this.onPauseVideo} />
+        </Button.Group>
       </Segment>
     );
   }
